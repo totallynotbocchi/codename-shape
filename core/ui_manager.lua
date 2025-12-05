@@ -49,6 +49,12 @@ function UIManager:mousepressed(x, y, button)
   end
 end
 
+function UIManager:touchreleased(id, x, y)
+  for _, element in pairs(self:getCurrentLayer()) do
+    element:touchreleased(id, x, y)
+  end
+end
+
 function UIManager:draw()
   for _, element in pairs(self:getCurrentLayer()) do
     element:draw()

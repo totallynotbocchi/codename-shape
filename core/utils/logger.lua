@@ -8,7 +8,8 @@ function Logger:init(filepath)
 
   -- empty or create the log file
   if filepath then
-    io.open(filepath, "w+")
+    io.open(filepath, "w")
+    print("File created.")
   end
 end
 
@@ -31,7 +32,7 @@ function Logger:log(msg, ...)
   -- also write it to the file if present
   if self.filepath then
     local file, err = io.open(self.filepath, "a+")
-    if err or not file then print("Error opening log file: " .. err) end
+    if not file then error("Error opening log file: " .. err) end
 
     file:write(str, "\n")
     file:close()

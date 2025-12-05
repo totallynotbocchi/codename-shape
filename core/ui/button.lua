@@ -1,4 +1,5 @@
 local Collisions = require("core.utils.collisions")
+local TableUtils = require("core.utils.table")
 
 local Button = {}
 Button.__index = Button
@@ -10,6 +11,8 @@ function Button:new(x, y, w, h)
   o.y = y
   o.width = w
   o.height = h
+
+  o.__touched_ids = {}
 
   -- callbacks
   o.__click_callback = nil
@@ -31,6 +34,17 @@ end
 function Button:mousepressed(x, y, button)
   if Collisions.boxWithPoint(self, { x = x, y = y }) and button == 1 then
     self.__click_callback()
+  end
+end
+
+function Button:touchreleased(id, x, y)
+  if
+      Collisions.boxWithPoint(self, { x = x, y = y })
+      and
+      not TableUtils.contains(self.__touched_ids, id)
+  then
+    self.__click_callback()
+    table.insert(self.__touched_ids, id)
   end
 end
 

@@ -20,16 +20,21 @@ function SongManager:new(speed_scale)
   return o
 end
 
-function SongManager:loadAudio(json_content)
+function SongManager:loadAudio(audio_path)
   -- load the song
-  self.source, err = love.audio.newSource(json_content.audio_file)
+  local ok, result = pcall(love.audio.newSource, audio_path, "stream")
 
-  if not self.source or err then
-    Logger:err("Failed to load song file %s, message: %s", json_content.audio_file or "nil", err)
+  if not ok then
+    Logger:err("Failed to load song file %s, message: %s", audio_path, result)
+
+    self.source = nil -- make sure it keeps being nil
+    self.loaded_song = false
     return false
   end
 
-  Logger:info("Song file %s was loaded", self.file_path)
+  Logger:info("Song file %s was loaded", audio_path)
+
+  self.source = result
   self.loaded_song = true
   return true
 end
@@ -38,7 +43,21 @@ end
 function SongManager:update(dt)
   if not self.loaded_song then return end
 
-  self.pos = self.source:getPosition()
+  self.pos = self.source:tell("seconds")
+end
+
+function SongManager:playCurrent()
+  if not self.loaded_song then return end
+
+  self.source:setVolume(1)
+  local success = self.source:play()
+
+  if not success then
+    Logger:err("Failed to play audio.")
+  end
+
+  Logger:info("Started playing audio")
+  return success
 end
 
 return SongManager

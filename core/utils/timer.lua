@@ -22,3 +22,5 @@ end
 function Timer:reset()
   self.current = 0
 end
+
+return Timer
