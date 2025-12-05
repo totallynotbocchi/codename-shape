@@ -1,0 +1,3 @@
+[submodule "vendor/json.lua"]
+	path = vendor/json.lua
+	url = https://github.com/rxi/json.lua

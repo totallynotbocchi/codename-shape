@@ -1,0 +1,7 @@
+{
+  "name": "Test",
+  "audio_file": "test.wav",
+  "notes": [
+    { "shape": "square", "x": 10, "time": 1 }
+  ]
+}
