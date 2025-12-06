@@ -18,10 +18,12 @@ function Note:new(shape, time, x)
   o.time = time
 
   -- physical position
-  o.pos = Vector2:new(x, -100)
+  o.x = x
+  o.y = -100
+  o.width = 50
+  o.height = 40
 
   o.was_hit = false
-  o.visible = false
 
   setmetatable(o, self)
   return o
@@ -42,11 +44,15 @@ function Note:isOnScreen()
   )
 end
 
--- TODO: implement ts
 function Note:draw()
-  if not self.visible then
-    error("Draw note not implemented")
-  end
+  if not self:isOnScreen() then return end
+
+  love.graphics.push()
+
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+
+  love.graphics.pop()
 end
 
 return Note

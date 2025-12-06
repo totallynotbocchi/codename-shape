@@ -34,6 +34,9 @@ function MainMenu:load(ui_manager, scene_manager)
   )
 end
 
+function MainMenu:update()
+end
+
 function MainMenu:draw()
   love.graphics.print("Hello", 10, 10)
 end

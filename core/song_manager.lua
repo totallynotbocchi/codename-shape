@@ -11,7 +11,7 @@ function SongManager:new(speed_scale)
   local o = {}
 
   o.speed_scale = speed_scale or 1
-  o.pos = 0             -- time position in the song!!
+  o.pos = 0             -- time position in the song!! miiliseconds
 
   o.loaded_song = false -- any song is loaded
   o.source = nil        -- raw love2d audio
@@ -40,10 +40,10 @@ function SongManager:loadAudio(audio_path)
 end
 
 -- dt is useless
-function SongManager:update(dt)
+function SongManager:update()
   if not self.loaded_song then return end
 
-  self.pos = self.source:tell("seconds")
+  self.pos = self.source:tell("seconds") * 1000
 end
 
 function SongManager:playCurrent()

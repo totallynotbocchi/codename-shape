@@ -1,6 +1,7 @@
 local Scene = require("core.scenes.base")
 local NoteManager = require("core.note_manager")
 local SongManager = require("core.song_manager")
+local RhythmManager = require("core.rhythm_manager")
 local ChartLoader = require("core.chart_loader")
 local Logger = require("core.utils.logger")
 
@@ -13,6 +14,7 @@ function Level:new(level_path)
   o.chart_loader = ChartLoader:new(level_path)
   o.song_manager = SongManager:new()
   o.note_manager = NoteManager:new()
+  o.rhythm_manager = RhythmManager:new()
 
   setmetatable(o, self)
   return o
@@ -40,9 +42,14 @@ function Level:load(ui_manager)
 end
 
 function Level:update(dt)
+  self.note_manager:update(self.song_manager)
+  self.song_manager:update()
 end
 
 function Level:draw()
+  for _, note in pairs(self.note_manager.notes) do
+    note:draw()
+  end
 end
 
 return Level

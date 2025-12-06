@@ -3,14 +3,17 @@ local Logger = {
   filepath = nil
 }
 
-function Logger:init(filepath)
-  self.filepath = filepath
+function Logger:init()
+  local current_os = love.system.getOS()
+  if current_os == "Linux" then
+    self.filepath = os.getenv("HOME") .. "/cds_log.txt"
+  elseif current_os == "Android" then
+    self.filepath = "/sdcard/Download/cds_log.txt"
+  end
 
   -- empty or create the log file
-  if filepath then
-    io.open(filepath, "w")
-    print("File created.")
-  end
+  io.open(self.filepath, "w")
+  print("File created.")
 end
 
 function Logger:log(msg, ...)

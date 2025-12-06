@@ -4,18 +4,13 @@ local Logger = require("core.utils.logger")
 fmt = string.format
 local current_os = love.system.getOS()
 
-if current_os == "Linux" then
-  Logger:init("/tmp/cds_log.txt")
-elseif current_os == "Android" then
-  Logger:init("/sdcard/Download/cds_log.txt")
-end
-
 -- create the game manager instance
 local game_manager = GameManager:new()
 
 -- love2d stuff
 
 function love.load()
+  Logger:init()
   game_manager:load()
 end
 

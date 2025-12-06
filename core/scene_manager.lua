@@ -29,10 +29,11 @@ function SceneManager:setCurrent(id)
 end
 
 function SceneManager:update(dt)
+  if self.current_scene then self.current_scene:update(dt) end
 end
 
 function SceneManager:draw()
-  self.current_scene:draw()
+  if self.current_scene then self.current_scene:draw() end
 end
 
 return SceneManager

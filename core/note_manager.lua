@@ -26,30 +26,23 @@ function NoteManager:loadChart(note_list)
   -- load all the note objects
   for _, file_note in pairs(note_list) do
     -- check if the json object has the needed data
-    if not file_note.shape or not file_note.x then
+    if not file_note.shape or not file_note.x or not file_note.time then
       Logger:err("The note object in the JSON is lacking essential information")
       return false
     end
 
-    table.insert(
-      self.notes,
-      Note:new(file_note.shape, file_note.x)
-    )
+    -- add the new note
+    self:addNote(Note:new(file_note.shape, file_note.time, file_note.x))
   end
 
   Logger:info("Note objects were loaded")
   return true
 end
 
-function NoteManager:update(dt, song_manager)
+function NoteManager:update(song_manager)
   for _, note in pairs(self.notes) do
     -- update their position
     note.y = (song_manager.pos - note.time) * song_manager.speed_scale
-
-    -- check if they are hit
-    if note:isInHitRange() then
-      error("Fuck you nigga")
-    end
   end
 end
 

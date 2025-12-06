@@ -30,6 +30,8 @@ end
 function GameManager:draw()
   self.scene_manager:draw()
   self.ui_manager:draw()
+
+  love.graphics.print(fmt("FPS: %d", love.timer.getFPS()))
 end
 
 -- NOTE: order only matters for some things
