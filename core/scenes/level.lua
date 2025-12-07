@@ -25,7 +25,7 @@ function Level:load(ui_manager)
   ui_manager:createLayer("level")
   ui_manager:setCurrentLayer("level")
 
-  -- load scene data!!
+  -- load data about the level from the directory n shit
   Logger:info("Loading level...")
   if not self.chart_loader:load(self.note_manager, self.song_manager) then
     self.is_loaded = false
@@ -42,14 +42,17 @@ function Level:load(ui_manager)
 end
 
 function Level:update(dt)
-  self.note_manager:update(self.song_manager)
   self.song_manager:update()
+  self.note_manager:update(self.song_manager)
 end
 
 function Level:draw()
-  for _, note in pairs(self.note_manager.notes) do
-    note:draw()
-  end
+  self.note_manager:draw()
+
+  -- draw the score line
+  local width = love.graphics.getWidth()
+  local height = love.graphics.getHeight()
+  love.graphics.rectangle("fill", 0, height - 60, width, 5)
 end
 
 return Level

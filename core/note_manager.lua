@@ -46,4 +46,10 @@ function NoteManager:update(song_manager)
   end
 end
 
+function NoteManager:draw()
+  for _, note in pairs(self.notes) do
+    note:draw()
+  end
+end
+
 return NoteManager

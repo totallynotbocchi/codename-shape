@@ -2,6 +2,7 @@
   "name": "Test",
   "audio_file": "test.wav",
   "notes": [
-    { "shape": "square", "x": 10, "time": 1 }
+    { "shape": "square", "x": 600, "time": 1 },
+    { "shape": "square", "x": 400, "time": 2000 }
   ]
 }

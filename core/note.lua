@@ -15,7 +15,7 @@ function Note:new(shape, time, x)
 
   o.shape = shape
 
-  o.time = time
+  o.time = time -- in milliseconds
 
   -- physical position
   o.x = x
