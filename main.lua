@@ -14,6 +14,11 @@ function love.load()
   game_manager:load()
 end
 
+function love.update(dt)
+  game_manager:update(dt)
+end
+
+-- love2d callbacks
 function love.mousepressed(x, y, button)
   if current_os ~= "Linux" and current_os ~= "Windows" and current_os ~= "OS X" then return end
   game_manager.ui_manager:mousepressed(x, y, button)
@@ -24,8 +29,12 @@ function love.touchreleased(id, x, y)
   game_manager.ui_manager:touchreleased(id, x, y)
 end
 
-function love.update(dt)
-  game_manager:update(dt)
+function love.keypressed(key)
+  game_manager.scene_manager:keypressed(key)
+end
+
+function love.touchpressed(id, x, y)
+  game_manager.scene_manager:touchpressed(id, x, y)
 end
 
 function love.draw()

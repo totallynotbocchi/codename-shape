@@ -1,8 +1,9 @@
 {
   "name": "Test",
   "audio_file": "test.wav",
+  "speed_scale": "0.2",
   "notes": [
-    { "shape": "square", "x": 600, "time": 1 },
-    { "shape": "square", "x": 400, "time": 2000 }
+    { "shape": "square", "key": "a", "x": 600, "time": 1 },
+    { "shape": "square", "key": "b", "x": 400, "time": 2000 }
   ]
 }

@@ -54,6 +54,7 @@ function SongManager:playCurrent()
 
   if not success then
     Logger:err("Failed to play audio.")
+    return success
   end
 
   Logger:info("Started playing audio")

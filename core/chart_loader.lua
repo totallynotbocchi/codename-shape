@@ -45,6 +45,8 @@ function ChartLoader:load(note_manager, song_manager)
     return false
   end
 
+  song_manager.speed_scale = json_content.speed_scale or 1
+
   return true
 end
 

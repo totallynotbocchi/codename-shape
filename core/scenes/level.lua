@@ -52,7 +52,16 @@ function Level:draw()
   -- draw the score line
   local width = love.graphics.getWidth()
   local height = love.graphics.getHeight()
-  love.graphics.rectangle("fill", 0, height - 60, width, 5)
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.rectangle("fill", 0, height - 60, width, 3)
+end
+
+function Level:keypressed(key)
+  self.note_manager:keypressed(key)
+end
+
+function Level:touchpressed(id, x, y)
+  self.note_manager:touchpressed(id, x, y)
 end
 
 return Level

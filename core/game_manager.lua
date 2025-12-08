@@ -31,6 +31,8 @@ function GameManager:draw()
   self.scene_manager:draw()
   self.ui_manager:draw()
 
+  -- debug stuff
+  love.graphics.setColor(0, 255, 0)
   love.graphics.print(fmt("FPS: %d", love.timer.getFPS()))
 end
 

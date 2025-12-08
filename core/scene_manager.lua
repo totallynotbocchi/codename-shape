@@ -36,4 +36,18 @@ function SceneManager:draw()
   if self.current_scene then self.current_scene:draw() end
 end
 
+-- love2d callbacks
+
+function SceneManager:keypressed(key)
+  if self.current_scene and self.current_scene.keypressed then
+    self.current_scene:keypressed(key)
+  end
+end
+
+function SceneManager:touchpressed(id, x, y)
+  if self.current_scene and self.current_scene.touchpressed then
+    self.current_scene:touchpressed(id, x, y)
+  end
+end
+
 return SceneManager
