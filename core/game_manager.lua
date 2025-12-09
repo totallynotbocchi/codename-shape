@@ -1,7 +1,9 @@
 local SceneManager = require("core.scene_manager")
 local UIManager = require("core.ui_manager")
+local InputManager = require("core.input_manager")
 local MainMenuScene = require("core.scenes.main_menu")
 local Logger = require("core.utils.logger")
+local TableUtils = require("core.utils.table")
 
 local GameManager = {}
 GameManager.__index = GameManager
@@ -11,6 +13,17 @@ function GameManager:new()
 
   o.scene_manager = SceneManager:new()
   o.ui_manager = UIManager:new()
+  o.input_manager = InputManager:new()
+
+  if TableUtils.contains({ "Android", "iOS" }, love.system.getOS()) then
+    Logger:info("Game manager detected mobile platform")
+    o.input_manager:addTouchPressed(o.scene_manager)
+    o.input_manager:addTouchReleased(o.ui_manager)
+  else
+    Logger:info("Game manager detected desktop platform")
+    o.input_manager:addKeyPressed(o.scene_manager)
+    o.input_manager:addMousePressed(o.ui_manager)
+  end
 
   Logger:info("Game manager instance initialized")
   setmetatable(o, self)
